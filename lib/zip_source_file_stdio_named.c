@@ -327,10 +327,13 @@ static int create_temp_file(zip_source_file_context_t *ctx, bool create_file) {
             if ((fd = open(temp, O_CREAT | O_EXCL | O_RDWR | O_CLOEXEC, mode == -1 ? 0666 : (mode_t)mode)) >= 0) {
                 if (mode != -1) {
                     /* open() honors umask(), which we don't want in this case */
-#ifdef HAVE_FCHMOD
+#ifdef HAVE_FCHMOD2
                     (void)fchmod(fd, (mode_t)mode);
 #else
+#ifdef HAVE_CHMOD
                     (void)chmod(temp, (mode_t)mode);
+                    // no idea what to do if there is no chmod either, guess we silent bail out here
+#endif
 #endif
                 }
                 break;
