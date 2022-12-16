@@ -27,6 +27,7 @@
 #cmakedefine HAVE_FICLONERANGE
 #cmakedefine HAVE_FILENO
 #cmakedefine HAVE_FCHMOD
+#cmakedefine HAVE_CHMOD
 #cmakedefine HAVE_FSEEKO
 #cmakedefine HAVE_FTELLO
 #cmakedefine HAVE_GETPROGNAME
